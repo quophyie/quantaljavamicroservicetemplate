@@ -1,7 +1,7 @@
 package com.quantal.quantalmicroservicetemplate.controllers;
 
-import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import com.quantal.quantalmicroservicetemplate.facades.MicroserviceFacade;
+import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

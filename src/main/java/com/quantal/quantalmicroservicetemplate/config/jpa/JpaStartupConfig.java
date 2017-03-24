@@ -17,6 +17,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
+//@EnableJpaRepositories("com.quantal.quantalmicroservicetemplate.models")
 @EnableJpaRepositories(basePackages = "com.quantal.quantalmicroservicetemplate.repositories")
 @EntityScan("com.quantal.quantalmicroservicetemplate.models")
 @EnableTransactionManagement

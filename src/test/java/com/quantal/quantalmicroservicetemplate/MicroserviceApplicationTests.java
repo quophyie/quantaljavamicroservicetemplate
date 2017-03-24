@@ -21,8 +21,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(MockitoJUnitRunner.class)
-@SpringBootTest
+//@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class MicroserviceApplicationTests {
 
 	@Test
