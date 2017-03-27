@@ -1,5 +1,6 @@
 package com.quantal.quantalmicroservicetemplate.models;
 
+import com.quantal.quantalmicroservicetemplate.enums.Gender;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -35,4 +36,5 @@ public class MicroserviceModel implements Serializable{
   private LocalDate activeDate;
   private LocalDate deactivatedDate;
   private Long companyId;
+  private Gender gender;
 }

@@ -1,5 +1,6 @@
 package com.quantal.quantalmicroservicetemplate.dto;
 
+import com.quantal.quantalmicroservicetemplate.enums.Gender;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -20,5 +21,6 @@ public class MicroserviceDto {
   private LocalDate activeDate;
   private LocalDate deactivatedDate;
   private Long companyId;
+  private Gender gender;
 
 }

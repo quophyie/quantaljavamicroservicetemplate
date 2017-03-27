@@ -5,6 +5,7 @@ import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
 import com.quantal.quantalmicroservicetemplate.services.interfaces.MicroserviceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,23 @@ public class MicroserviceFacade extends AbstractBaseFacade {
     MicroserviceModel created  = microserviceService.saveOrUpdate(microserviceModelToCreate);
     MicroserviceDto createdDto = toDto(created, MicroserviceDto.class);
     return toRESTResponse(createdDto);
+  }
+
+  public ResponseEntity<?>  update(MicroserviceDto microserviceDto){
+
+    if (microserviceDto == null) {
+      return toRESTResponse(microserviceDto, HttpStatus.NOT_FOUND);
+    }
+
+    MicroserviceModel modelInDB = microserviceService.findOneByEmail(microserviceDto.getEmail());
+
+    if (modelInDB == null) {
+      return toRESTResponse(microserviceDto, HttpStatus.NOT_FOUND);
+    }
+    MicroserviceModel updatedModelToSave = toModel(microserviceDto, modelInDB, false);
+    MicroserviceModel updated  = microserviceService.saveOrUpdate(updatedModelToSave);
+    MicroserviceDto updatedDto = toDto(updated, MicroserviceDto.class);
+    return toRESTResponse(updatedDto);
   }
 
   public CompletableFuture<String> getFunnyCat(){

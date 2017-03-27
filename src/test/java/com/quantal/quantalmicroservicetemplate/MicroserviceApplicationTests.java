@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 //@RunWith(MockitoJUnitRunner.class)
-@RunWith(SpringRunner.class)
+// @RunWith(SpringRunner.class)
 //@SpringBootTest
 public class MicroserviceApplicationTests {
 

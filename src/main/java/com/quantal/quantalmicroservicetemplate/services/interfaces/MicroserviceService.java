@@ -8,5 +8,6 @@ import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 public interface MicroserviceService {
 
   MicroserviceModel saveOrUpdate(MicroserviceModel microserviceModel);
+  MicroserviceModel findOneByEmail(String email);
 
 }

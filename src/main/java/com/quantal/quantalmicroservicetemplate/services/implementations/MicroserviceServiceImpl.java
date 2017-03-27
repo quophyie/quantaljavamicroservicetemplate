@@ -25,4 +25,9 @@ public class MicroserviceServiceImpl implements MicroserviceService {
     microserviceModel.setJoinDate(LocalDate.now());
     return microserviceRepository.save(microserviceModel);
   }
+
+  @Override
+  public MicroserviceModel findOneByEmail(String email) {
+    return microserviceRepository.findOneByEmail(email);
+  }
 }
