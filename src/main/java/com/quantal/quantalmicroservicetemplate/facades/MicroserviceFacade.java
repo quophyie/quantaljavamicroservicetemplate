@@ -32,24 +32,25 @@ public class MicroserviceFacade extends AbstractBaseFacade {
     MicroserviceModel microserviceModelToCreate = toModel(microserviceDto, MicroserviceModel.class);
     MicroserviceModel created  = microserviceService.saveOrUpdate(microserviceModelToCreate);
     MicroserviceDto createdDto = toDto(created, MicroserviceDto.class);
-    return toRESTResponse(createdDto);
+    return toRESTResponse(createdDto, "Created successfully");
   }
 
   public ResponseEntity<?>  update(MicroserviceDto microserviceDto){
 
+    String errMsg = "Model Not Found";
     if (microserviceDto == null) {
-      return toRESTResponse(microserviceDto, HttpStatus.NOT_FOUND);
+      return toRESTResponse(microserviceDto, errMsg, HttpStatus.NOT_FOUND);
     }
 
     MicroserviceModel modelInDB = microserviceService.findOneByEmail(microserviceDto.getEmail());
 
     if (modelInDB == null) {
-      return toRESTResponse(microserviceDto, HttpStatus.NOT_FOUND);
+      return toRESTResponse(microserviceDto, errMsg, HttpStatus.NOT_FOUND);
     }
     MicroserviceModel updatedModelToSave = toModel(microserviceDto, modelInDB, false);
     MicroserviceModel updated  = microserviceService.saveOrUpdate(updatedModelToSave);
     MicroserviceDto updatedDto = toDto(updated, MicroserviceDto.class);
-    return toRESTResponse(updatedDto);
+    return toRESTResponse(updatedDto, "Model updated successfully");
   }
 
   public CompletableFuture<String> getFunnyCat(){

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+
 public abstract class AbstractBaseFacade {
 
   @Autowired
@@ -29,10 +30,10 @@ public abstract class AbstractBaseFacade {
    * @param <TResponseDTOData>
    * @return
    */
-  public static <TResponseDTOData> ResponseEntity<?> toRESTResponse(TResponseDTOData reponseDTOData, HttpStatus httpStatus, HttpHeaders httpHeaders){
+  public static <TResponseDTOData> ResponseEntity<?> toRESTResponse(TResponseDTOData reponseDTOData, String message, HttpStatus httpStatus, HttpHeaders httpHeaders){
 
     ResponseEntity<ResponseDTO<TResponseDTOData>> response;
-    ResponseDTO<TResponseDTOData> responseDTO = new ResponseDTO<>(reponseDTOData);
+    ResponseDTO<TResponseDTOData> responseDTO = new ResponseDTO<>(message,httpStatus.value(),reponseDTOData);
     if (httpHeaders != null){
       response = new ResponseEntity<>(responseDTO, httpHeaders, httpStatus);
     } else {
@@ -47,10 +48,10 @@ public abstract class AbstractBaseFacade {
    * @param <TResponseDTOData>
    * @return
    */
-  public static <TResponseDTOData> ResponseEntity<?> toRESTResponse(TResponseDTOData reponseDTOData, HttpStatus httpStatus){
+  public static <TResponseDTOData> ResponseEntity<?> toRESTResponse(TResponseDTOData reponseDTOData, String message, HttpStatus httpStatus){
     HttpHeaders headers = new HttpHeaders();
     headers.add(HttpHeaders.CONTENT_TYPE,  MediaType.APPLICATION_JSON_VALUE);
-    return toRESTResponse(reponseDTOData,httpStatus,headers);
+    return toRESTResponse(reponseDTOData,message, httpStatus,headers);
   }
 
 
@@ -60,12 +61,12 @@ public abstract class AbstractBaseFacade {
    * @param <TResponseDTOData>
    * @return
    */
-  public static <TResponseDTOData> ResponseEntity<?> toRESTResponse(TResponseDTOData reponseDTOData){
-    return toRESTResponse(reponseDTOData,HttpStatus.OK);
+  public static <TResponseDTOData> ResponseEntity<?> toRESTResponse(TResponseDTOData reponseDTOData, String message){
+    return toRESTResponse(reponseDTOData, message, HttpStatus.OK);
   }
 
   /**
-   * Maps a DTO to a model given the type (class) of the model
+   * Maps a DTO to a model
    * @param source - the source model to map from i.e. The DTO
    * @param clazz  - The closs (type) of the destination model
    * @param <TDTO> - The type of the source object i.e. the DTO
@@ -102,7 +103,7 @@ public abstract class AbstractBaseFacade {
   }
 
   /**
-   * Maps a model to a DTO given the type (class) of the DTO
+   * Maps a model to a DTO
    * @param source - the source model to map from i.e. The DTO
    * @param clazz  - The closs (type) of the destination model
    * @param <TDTO> - The type of the source object i.e. the DTO
