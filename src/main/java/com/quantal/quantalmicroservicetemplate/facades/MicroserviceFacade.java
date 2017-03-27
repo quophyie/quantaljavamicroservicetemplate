@@ -32,7 +32,7 @@ public class MicroserviceFacade extends AbstractBaseFacade {
     MicroserviceModel microserviceModelToCreate = toModel(microserviceDto, MicroserviceModel.class);
     MicroserviceModel created  = microserviceService.saveOrUpdate(microserviceModelToCreate);
     MicroserviceDto createdDto = toDto(created, MicroserviceDto.class);
-    return toRESTResponse(createdDto, "Created successfully");
+    return toRESTResponse(createdDto, "Created successfully", HttpStatus.CREATED);
   }
 
   public ResponseEntity<?>  update(MicroserviceDto microserviceDto){
