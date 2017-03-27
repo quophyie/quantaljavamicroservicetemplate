@@ -1,13 +1,11 @@
-package facades;
+package com.quantal.quantalmicroservicetemplate.facades;
 
-import com.quantal.quantalmicroservicetemplate.MicroserviceApplication;
 import com.quantal.quantalmicroservicetemplate.dto.ResponseDTO;
 import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import com.quantal.quantalmicroservicetemplate.enums.Gender;
 import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
 import com.quantal.quantalmicroservicetemplate.services.interfaces.MicroserviceService;
-import com.quantal.quantalmicroservicetemplate.facades.MicroserviceFacade;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +26,7 @@ import static org.mockito.Mockito.verify;
  */
 @RunWith(SpringRunner.class)
 //@WebMvcTest(UserManagementFacade.class)
-@SpringBootTest(classes = {MicroserviceApplication.class})
+@SpringBootTest
 @AutoConfigureMockMvc
 public class MicroserviceFacadeTest {
 
