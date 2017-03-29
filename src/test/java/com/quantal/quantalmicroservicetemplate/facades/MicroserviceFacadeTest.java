@@ -6,6 +6,7 @@ import com.quantal.quantalmicroservicetemplate.enums.Gender;
 import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
 import com.quantal.quantalmicroservicetemplate.services.interfaces.MicroserviceService;
+import org.assertj.core.api.Java6Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -86,7 +89,15 @@ public class MicroserviceFacadeTest {
                 .saveOrUpdate(eq(updateModel)))
                 .willReturn(persistedModel);
 
-        MicroserviceDto result = (MicroserviceDto)((ResponseDTO) microserviceFacade.update(updateDto).getBody()).getData();
+        ResponseEntity<?> responseEntity = microserviceFacade.update(updateDto);
+        MicroserviceDto result = ((ResponseDTO<MicroserviceDto>)responseEntity.getBody()).getData();
+        String message = ((ResponseDTO<MicroserviceDto>)responseEntity.getBody()).getMessage();
+
+        HttpStatus httpStatusCode  = responseEntity.getStatusCode();
+        Java6Assertions.assertThat(httpStatusCode).isEqualTo(HttpStatus.OK);
+        Java6Assertions.assertThat("MicroserviceModel updated successfully").isEqualToIgnoringCase(message);
+
+        //MicroserviceDto result = (MicroserviceDto)((ResponseDTO) microserviceFacade.update(updateDto).getBody()).getData();
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(id);
         assertThat(result.getFirstName()).isEqualTo(updateDtoFirstName);
