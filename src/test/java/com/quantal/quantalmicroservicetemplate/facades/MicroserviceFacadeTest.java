@@ -1,11 +1,12 @@
 package com.quantal.quantalmicroservicetemplate.facades;
 
-import com.quantal.quantalmicroservicetemplate.dto.ResponseDTO;
+import com.quantal.quantalmicroservicetemplate.dto.ResponseDto;
 import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import com.quantal.quantalmicroservicetemplate.enums.Gender;
 import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
 import com.quantal.quantalmicroservicetemplate.services.interfaces.MicroserviceService;
+import com.quantal.quantalmicroservicetemplate.util.TestUtil;
 import org.assertj.core.api.Java6Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -90,14 +91,14 @@ public class MicroserviceFacadeTest {
                 .willReturn(persistedModel);
 
         ResponseEntity<?> responseEntity = microserviceFacade.update(updateDto);
-        MicroserviceDto result = ((ResponseDTO<MicroserviceDto>)responseEntity.getBody()).getData();
-        String message = ((ResponseDTO<MicroserviceDto>)responseEntity.getBody()).getMessage();
+        MicroserviceDto result = TestUtil.getResponseDtoData(responseEntity);
+        String message = TestUtil.getResponseDtoMessage(responseEntity);
 
         HttpStatus httpStatusCode  = responseEntity.getStatusCode();
         Java6Assertions.assertThat(httpStatusCode).isEqualTo(HttpStatus.OK);
         Java6Assertions.assertThat("MicroserviceModel updated successfully").isEqualToIgnoringCase(message);
 
-        //MicroserviceDto result = (MicroserviceDto)((ResponseDTO) microserviceFacade.update(updateDto).getBody()).getData();
+        //MicroserviceDto result = (MicroserviceDto)((ResponseDto) microserviceFacade.update(updateDto).getBody()).getData();
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(id);
         assertThat(result.getFirstName()).isEqualTo(updateDtoFirstName);
