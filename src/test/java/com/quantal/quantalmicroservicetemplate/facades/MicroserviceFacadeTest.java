@@ -1,12 +1,11 @@
 package com.quantal.quantalmicroservicetemplate.facades;
 
-import com.quantal.quantalmicroservicetemplate.dto.ResponseDto;
 import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import com.quantal.quantalmicroservicetemplate.enums.Gender;
 import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
 import com.quantal.quantalmicroservicetemplate.services.interfaces.MicroserviceService;
-import com.quantal.quantalmicroservicetemplate.util.TestUtil;
+import com.quantal.basecomponents.util.TestUtil;
 import org.assertj.core.api.Java6Assertions;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,10 +1,13 @@
 package com.quantal.quantalmicroservicetemplate.facades;
 
+import com.quantal.basecomponents.facades.AbstractBaseFacade;
+import com.quantal.basecomponents.objectmapper.NullSkippingOrikaBeanMapper;
+import com.quantal.basecomponents.objectmapper.OrikaBeanMapper;
 import com.quantal.quantalmicroservicetemplate.constants.MessageCodes;
 import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
-import com.quantal.quantalmicroservicetemplate.services.interfaces.MessageService;
+import com.quantal.basecomponents.services.interfaces.MessageService;
 import com.quantal.quantalmicroservicetemplate.services.interfaces.MicroserviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +28,12 @@ public class MicroserviceFacade extends AbstractBaseFacade {
 
 
   @Autowired
-  public MicroserviceFacade(MicroserviceService microserviceService, GiphyApiService giphyApiService, MessageService messageService) {
+  public MicroserviceFacade(MicroserviceService microserviceService,
+                            GiphyApiService giphyApiService,
+                            MessageService messageService,
+                            OrikaBeanMapper orikaBeanMapper,
+                            NullSkippingOrikaBeanMapper nullSkippingOrikaBeanMapper) {
+    super(orikaBeanMapper, nullSkippingOrikaBeanMapper);
     this.microserviceService = microserviceService;
     this.giphyApiService = giphyApiService;
     this.messageService = messageService;
