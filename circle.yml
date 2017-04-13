@@ -1,8 +1,5 @@
 machine:
   timezone: Europe/London
-test:
-  override:
-    - mvn deploy -Pgpg -s settings.xml
 dependencies:
   override:
     - mvn dependency:resolve -s settings.xml
