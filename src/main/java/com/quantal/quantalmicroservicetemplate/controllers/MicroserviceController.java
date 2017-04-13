@@ -1,7 +1,9 @@
 package com.quantal.quantalmicroservicetemplate.controllers;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.quantal.quantalmicroservicetemplate.facades.MicroserviceFacade;
 import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
+import com.quantal.quantalmicroservicetemplate.jsonviews.MicroserviceViews;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ public class MicroserviceController {
     this.microserviceFacade = microserviceFacade;
   }
 
+  @JsonView(MicroserviceViews.MicroserviceCreatedView.class)
   @PostMapping(value="", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> createUser(@RequestBody MicroserviceDto microserviceDto){
     return microserviceFacade.saveOrUpdateUser(microserviceDto);
