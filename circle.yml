@@ -1,5 +1,2 @@
 machine:
   timezone: Europe/London
-dependencies:
-  override:
-    - mvn dependency:resolve -s settings.xml
