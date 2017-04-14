@@ -2,8 +2,8 @@ package com.quantal.quantalmicroservicetemplate.config.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.quantal.quantalmicroservicetemplate.convertors.LocalDateConverter;
-import com.quantal.quantalmicroservicetemplate.convertors.LocalDateTimeConverter;
+import com.quantal.shared.convertors.LocalDateConverter;
+import com.quantal.shared.convertors.LocalDateTimeConverter;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -22,7 +22,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import retrofit2.Retrofit;
 import retrofit2.adapter.java8.Java8CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
