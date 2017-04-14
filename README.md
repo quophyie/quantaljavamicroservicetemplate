@@ -5,6 +5,8 @@ To use the template, simply clone this repository and update the following
 
 ## base package name
 
+The POM extends [Microservice Base POM](https://github.com/quophyie/microservicebasepom)
+
 In your POM, update the **`artifactId`** and **`name`** to values of your choice
 
 Refactor the base package name (i.e. **`com.quantal.quantalmicroservicetemplate`**) to a name of your choice
@@ -27,5 +29,11 @@ Refactor the base package name (i.e. **`com.quantal.quantalmicroservicetemplate`
  - Change the base package in the annotation **`@EnableJpaRepositories`** to your desired package
  - Change the base package in the annotation **`@EntityScan`** to your desired package
  - Change the base package in the method call to  **`factory.setPackagesToScan("com.quantal.quantalmicroservicetemplate.models")`** to your desired package
+ 
+## SharedConfig.java (/src/main/java/com/quantal/quantalmicroservicetemplate/config/jpa/) 
 
+ This contains bean configuratons that do not belong in either **`JpaStartupConfig.java`**
+ **`ApiConfig.java`** and  **`WebStartupConfig.java`**
 
+## resources/db/migration
+ This is a **`required directory`**.  This contains SQL for both migrations and seed files

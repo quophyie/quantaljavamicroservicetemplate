@@ -1,9 +1,9 @@
 package com.quantal.quantalmicroservicetemplate.config.shared;
 
-import com.quantal.basecomponents.objectmapper.NullSkippingOrikaBeanMapper;
-import com.quantal.basecomponents.objectmapper.OrikaBeanMapper;
-import com.quantal.basecomponents.services.implementations.MessageServiceImpl;
-import com.quantal.basecomponents.services.interfaces.MessageService;
+import com.quantal.shared.objectmapper.NullSkippingOrikaBeanMapper;
+import com.quantal.shared.objectmapper.OrikaBeanMapper;
+import com.quantal.shared.services.implementations.MessageServiceImpl;
+import com.quantal.shared.services.interfaces.MessageService;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

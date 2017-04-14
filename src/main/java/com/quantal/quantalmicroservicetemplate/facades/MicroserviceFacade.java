@@ -1,13 +1,13 @@
 package com.quantal.quantalmicroservicetemplate.facades;
 
-import com.quantal.basecomponents.facades.AbstractBaseFacade;
-import com.quantal.basecomponents.objectmapper.NullSkippingOrikaBeanMapper;
-import com.quantal.basecomponents.objectmapper.OrikaBeanMapper;
+import com.quantal.shared.facades.AbstractBaseFacade;
+import com.quantal.shared.objectmapper.NullSkippingOrikaBeanMapper;
+import com.quantal.shared.objectmapper.OrikaBeanMapper;
 import com.quantal.quantalmicroservicetemplate.constants.MessageCodes;
 import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
-import com.quantal.basecomponents.services.interfaces.MessageService;
+import com.quantal.shared.services.interfaces.MessageService;
 import com.quantal.quantalmicroservicetemplate.services.interfaces.MicroserviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
