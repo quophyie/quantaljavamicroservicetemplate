@@ -9,7 +9,7 @@ services:
     environment:
       - DB_HOST=postgres_quantalmicroservicetemplate
       - DB_PORT=5432
-
+    command: ["/wait-for-it.sh", "postgres_quantalmicroservicetemplate:5432", "--", "java",  "-jar", "~/quantalmicroservicetemplate-0.0.1-SNAPSHOT.jar"]
 
   # The postgres database
   postgres_quantalmicroservicetemplate:
