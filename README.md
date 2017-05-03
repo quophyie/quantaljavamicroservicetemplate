@@ -5,7 +5,6 @@ To use the template, simply clone this repository and update the following
 
 ## base package name
 
-The POM extends [Microservice Base POM](https://github.com/quophyie/microservicebasepom)
 
 In your POM, update the **`artifactId`** and **`name`** to values of your choice
 

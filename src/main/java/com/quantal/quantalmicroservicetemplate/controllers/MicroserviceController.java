@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.quantal.quantalmicroservicetemplate.facades.MicroserviceFacade;
 import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import com.quantal.quantalmicroservicetemplate.jsonviews.MicroserviceViews;
+import com.quantal.shared.controller.BaseControllerAsync;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/users/")
-public class MicroserviceController {
+public class MicroserviceController extends BaseControllerAsync {
 
   private MicroserviceFacade microserviceFacade;
 
