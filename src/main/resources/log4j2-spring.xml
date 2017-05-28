@@ -17,6 +17,10 @@
                     [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
                 </pattern>
             </PatternLayout>
+            <JsonLayout compact="true" eventEol="true"/>
+        </File>
+        <File name="Json-File-Appender" fileName="${log-path}/app_log.json" >
+            <JsonLayout compact="true" eventEol="true"/>
         </File>
         <File name="SpringBoot-File-Appender" fileName="${log-path}/springboot_log.log" >
             <PatternLayout>
@@ -33,6 +37,7 @@
         </Logger>
         <Logger name="com.quantal.quantalmicroservicetemplate" level="debug" additivity="false">
             <AppenderRef ref="App-File-Appender"/>
+            <AppenderRef ref="Json-File-Appender"/>
             <AppenderRef ref="Console-Appender"/>
         </Logger>
         <Root>
