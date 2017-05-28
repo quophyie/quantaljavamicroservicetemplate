@@ -9,6 +9,8 @@ import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
 import com.quantal.shared.services.interfaces.MessageService;
 import com.quantal.quantalmicroservicetemplate.services.interfaces.MicroserviceService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ public class MicroserviceFacade extends AbstractBaseFacade {
   private final GiphyApiService giphyApiService;
   private MessageService messageService;
 
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
   public MicroserviceFacade(MicroserviceService microserviceService,
@@ -41,14 +44,18 @@ public class MicroserviceFacade extends AbstractBaseFacade {
 
   public ResponseEntity<?> saveOrUpdateUser(MicroserviceDto microserviceDto){
 
+    logger.debug("Saving user:", microserviceDto);
     MicroserviceModel microserviceModelToCreate = toModel(microserviceDto, MicroserviceModel.class);
     MicroserviceModel created  = microserviceService.saveOrUpdate(microserviceModelToCreate);
     MicroserviceDto createdDto = toDto(created, MicroserviceDto.class);
+    logger.debug("Finished saving user:", createdDto);
     return toRESTResponse(createdDto, messageService.getMessage(MessageCodes.ENTITY_CREATED, new String[]{MicroserviceModel.class.getSimpleName()}), HttpStatus.CREATED);
+
   }
 
   public ResponseEntity<?>  update(MicroserviceDto microserviceDto){
 
+    logger.debug("updating user:", microserviceDto);
     String errMsg = "Model Not Found";
     if (microserviceDto == null) {
       return toRESTResponse(microserviceDto, errMsg, HttpStatus.NOT_FOUND);
@@ -62,13 +69,16 @@ public class MicroserviceFacade extends AbstractBaseFacade {
     MicroserviceModel updatedModelToSave = toModel(microserviceDto, modelInDB, false);
     MicroserviceModel updated  = microserviceService.saveOrUpdate(updatedModelToSave);
     MicroserviceDto updatedDto = toDto(updated, MicroserviceDto.class);
+    logger.debug("finished updating user:", updatedDto);
     return toRESTResponse(updatedDto, messageService.getMessage(MessageCodes.ENTITY_UPDATED, new String[]{MicroserviceModel.class.getSimpleName()}));
   }
 
   public CompletableFuture<String> getFunnyCat(){
+    logger.debug("Getting funny cat");
     //String result = "";
     //String result = giphyApiService.getGiphy("funny+cat", "dc6zaTOxFJmzC");
     CompletableFuture<String> result = giphyApiService.getGiphy("funny+cat", "dc6zaTOxFJmzC").thenApply((res) -> {
+      logger.debug("finished getting funny cat");
       return res;
     });
     return result;
