@@ -10,6 +10,11 @@ In your POM, update the **`artifactId`** and **`name`** to values of your choice
 
 Refactor the base package name (i.e. **`com.quantal.quantalmicroservicetemplate`**) to a name of your choice
  
+## Environment Variables
+ Somee default environment variables 
+ - **`API_GATEWAY_ENDPOINT`** - The base url of the api gateway - default should be **`http://localhost:8001`**
+ 
+ - **`LOGZIO_TOKEN`** - The [Logz.io](http://logz.io) token to use to send logs to [Logz.io](http://logz.io)
 
 ## application.properties  (located at src/main/java/resource)
   
