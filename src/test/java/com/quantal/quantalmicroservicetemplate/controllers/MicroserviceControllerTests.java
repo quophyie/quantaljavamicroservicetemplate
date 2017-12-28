@@ -2,6 +2,7 @@ package com.quantal.quantalmicroservicetemplate.controllers;
 
 import com.quantal.quantalmicroservicetemplate.MicroserviceApplication;
 import com.quantal.quantalmicroservicetemplate.facades.MicroserviceFacade;
+import com.quantal.javashared.dto.CommonLogFields;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,7 +50,7 @@ public class MicroserviceControllerTests {
     @Before
     public void setUp() {
 
-        microserviceController = new MicroserviceController(microserviceFacade);
+        microserviceController = new MicroserviceController(microserviceFacade, new CommonLogFields(),null);
     }
 
     @Test

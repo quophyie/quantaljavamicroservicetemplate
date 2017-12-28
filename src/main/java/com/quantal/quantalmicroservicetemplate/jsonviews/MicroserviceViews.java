@@ -1,7 +1,7 @@
 package com.quantal.quantalmicroservicetemplate.jsonviews;
 
 
-import com.quantal.shared.jsonviews.DefaultJsonView;
+import com.quantal.javashared.jsonviews.DefaultJsonView;
 
 /**
  * Created by dman on 13/04/2017.

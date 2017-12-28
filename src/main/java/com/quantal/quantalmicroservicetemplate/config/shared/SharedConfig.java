@@ -1,12 +1,21 @@
 package com.quantal.quantalmicroservicetemplate.config.shared;
 
-import com.quantal.shared.objectmapper.NullSkippingOrikaBeanMapper;
-import com.quantal.shared.objectmapper.OrikaBeanMapper;
-import com.quantal.shared.services.implementations.MessageServiceImpl;
-import com.quantal.shared.services.interfaces.MessageService;
+import com.quantal.javashared.dto.CommonLogFields;
+import com.quantal.javashared.dto.LogzioConfig;
+import com.quantal.javashared.logger.QuantalGoDaddyLoggerFactory;
+import com.quantal.javashared.objectmapper.NullSkippingOrikaBeanMapper;
+import com.quantal.javashared.objectmapper.OrikaBeanMapper;
+import com.quantal.javashared.services.implementations.MessageServiceImpl;
+import com.quantal.javashared.services.interfaces.MessageService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.time.Instant;
+import java.util.Locale;
 
 /**
  * Created by dman on 12/04/2017.
@@ -14,6 +23,15 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SharedConfig {
+
+    @Value("${spring.version}")
+    private String springVersion;
+
+    @Value("${spring.application.name}")
+    private String moduleName;
+
+    @Value("${spring.application.version}")
+    private String moduleVersion;
 
     @Bean
     public NullSkippingOrikaBeanMapper nullSkippingOrikaBeanMapper() {
@@ -29,6 +47,26 @@ public class SharedConfig {
     @Bean
     public MessageService messageService (MessageSource messageSource){
         return new MessageServiceImpl(messageSource);
+    }
+
+    @Bean
+    public CommonLogFields commonLogFields() throws UnknownHostException {
+        String hostname = InetAddress.getLocalHost().getHostName();
+        return new CommonLogFields(
+                "java",
+                "spring-boot",
+                springVersion,
+                moduleName,
+                hostname,
+                moduleVersion,
+                Locale.UK.toString(),
+                Instant.now().toString()
+        );
+    }
+
+    @Bean
+    public LogzioConfig logzioConfig(@Value("${logzio.token}") String logzioToken) {
+        return QuantalGoDaddyLoggerFactory.createDefaultLogzioConfig(logzioToken);
     }
 
 }

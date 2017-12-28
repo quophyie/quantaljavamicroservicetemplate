@@ -4,7 +4,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.quantal.quantalmicroservicetemplate.facades.MicroserviceFacade;
 import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import com.quantal.quantalmicroservicetemplate.jsonviews.MicroserviceViews;
-import com.quantal.shared.controller.BaseControllerAsync;
+import com.quantal.javashared.controller.BaseControllerAsync;
+import com.quantal.javashared.dto.CommonLogFields;
+import com.quantal.javashared.dto.LogEvent;
+import com.quantal.javashared.dto.LogzioConfig;
+import com.quantal.javashared.logger.QuantalGoDaddyLogger;
+import com.quantal.javashared.logger.QuantalGoDaddyLoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +28,27 @@ import java.util.concurrent.CompletableFuture;
 public class MicroserviceController extends BaseControllerAsync {
 
   private MicroserviceFacade microserviceFacade;
-  private Logger logger = LoggerFactory.getLogger(this.getClass());
+  //private Logger logger = LoggerFactory.getLogger(this.getClass());
+  private QuantalGoDaddyLogger logger;
 
   @Autowired
-  public MicroserviceController(MicroserviceFacade microserviceFacade) {
+  public MicroserviceController(MicroserviceFacade microserviceFacade,
+                                CommonLogFields commonLogFields,
+                                LogzioConfig logzioConfig) {
     this.microserviceFacade = microserviceFacade;
+    logger = QuantalGoDaddyLoggerFactory.getLogger(this.getClass(), commonLogFields, logzioConfig);
   }
 
   @JsonView(MicroserviceViews.MicroserviceCreatedView.class)
   @PostMapping(value="", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> createUser(@RequestBody MicroserviceDto microserviceDto){
-    logger.debug("started to  create user ...");
+    logger.debug("started to  create user ...", new LogEvent("USER_CREATE"));
     return microserviceFacade.saveOrUpdateUser(microserviceDto);
   }
 
   @GetMapping(value="")
   public CompletableFuture<String> getFunnyCatAsync(){
-    logger.debug("started to  get funny cat ...");
+    logger.debug("started to  get funny cat ...", new LogEvent("USER_CREATE"));
     return microserviceFacade.getFunnyCat();
   }
 

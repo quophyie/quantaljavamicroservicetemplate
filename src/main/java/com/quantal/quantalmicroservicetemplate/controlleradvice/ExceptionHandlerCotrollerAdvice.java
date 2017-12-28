@@ -1,8 +1,8 @@
 package com.quantal.quantalmicroservicetemplate.controlleradvice;
 
 import com.quantal.quantalmicroservicetemplate.constants.MessageCodes;
-import com.quantal.shared.services.interfaces.MessageService;
-import com.quantal.shared.util.CommonUtils;
+import com.quantal.javashared.services.interfaces.MessageService;
+import com.quantal.javashared.util.CommonUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import retrofit2.HttpException;
 
-import static com.quantal.shared.facades.AbstractBaseFacade.toRESTResponse;
+import static com.quantal.javashared.facades.AbstractBaseFacade.toRESTResponse;
 
 /**
  * Created by dman on 08/07/2017.

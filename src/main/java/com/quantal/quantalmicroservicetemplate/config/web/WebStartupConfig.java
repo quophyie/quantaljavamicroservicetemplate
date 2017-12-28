@@ -2,8 +2,8 @@ package com.quantal.quantalmicroservicetemplate.config.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.quantal.shared.convertors.LocalDateConverter;
-import com.quantal.shared.convertors.LocalDateTimeConverter;
+import com.quantal.javashared.convertors.LocalDateConverter;
+import com.quantal.javashared.convertors.LocalDateTimeConverter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
