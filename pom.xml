@@ -10,15 +10,12 @@
 
 	<name>quantalmicroservicetemplate</name>
 	<description>Quantal Microservice</description>
-
 	<parent>
 		<groupId>com.github.quophyie</groupId>
 		<artifactId>microservicebasepom</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
-
 	<repositories>
 		<repository>
 			<id>sonatype-nexus-snapshots</id>
