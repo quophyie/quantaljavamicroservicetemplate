@@ -8,8 +8,8 @@ import com.quantal.javashared.controller.BaseControllerAsync;
 import com.quantal.javashared.dto.CommonLogFields;
 import com.quantal.javashared.dto.LogEvent;
 import com.quantal.javashared.dto.LogzioConfig;
-import com.quantal.javashared.logger.QuantalGoDaddyLogger;
-import com.quantal.javashared.logger.QuantalGoDaddyLoggerFactory;
+import com.quantal.javashared.logger.QuantalLogger;
+import com.quantal.javashared.logger.QuantalLoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +29,14 @@ public class MicroserviceController extends BaseControllerAsync {
 
   private MicroserviceFacade microserviceFacade;
   //private Logger logger = LoggerFactory.getLogger(this.getClass());
-  private QuantalGoDaddyLogger logger;
+  private QuantalLogger logger;
 
   @Autowired
   public MicroserviceController(MicroserviceFacade microserviceFacade,
                                 CommonLogFields commonLogFields,
                                 LogzioConfig logzioConfig) {
     this.microserviceFacade = microserviceFacade;
-    logger = QuantalGoDaddyLoggerFactory.getLogger(this.getClass(), commonLogFields, logzioConfig);
+    logger = QuantalLoggerFactory.getLogzioLogger(this.getClass(), commonLogFields, logzioConfig);
   }
 
   @JsonView(MicroserviceViews.MicroserviceCreatedView.class)
