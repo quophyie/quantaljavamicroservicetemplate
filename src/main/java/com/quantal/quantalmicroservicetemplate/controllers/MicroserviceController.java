@@ -1,6 +1,7 @@
 package com.quantal.quantalmicroservicetemplate.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.quantal.javashared.annotations.logger.InjectLogger;
 import com.quantal.quantalmicroservicetemplate.facades.MicroserviceFacade;
 import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import com.quantal.quantalmicroservicetemplate.jsonviews.MicroserviceViews;
@@ -29,14 +30,12 @@ public class MicroserviceController extends BaseControllerAsync {
 
   private MicroserviceFacade microserviceFacade;
   //private Logger logger = LoggerFactory.getLogger(this.getClass());
+  @InjectLogger
   private QuantalLogger logger;
 
   @Autowired
-  public MicroserviceController(MicroserviceFacade microserviceFacade,
-                                CommonLogFields commonLogFields,
-                                LogzioConfig logzioConfig) {
+  public MicroserviceController(MicroserviceFacade microserviceFacade) {
     this.microserviceFacade = microserviceFacade;
-    logger = QuantalLoggerFactory.getLogzioLogger(this.getClass(), commonLogFields, logzioConfig);
   }
 
   @JsonView(MicroserviceViews.MicroserviceCreatedView.class)
