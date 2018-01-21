@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build_quantaljavamicroservicestemplate:
+  build_javamicroservicestemplate:
 
     working_directory: ~/quantaljavamicroservicestemplate
 
@@ -39,4 +39,4 @@ workflows:
   version: 2
   build_project:
     jobs:
-      - build_quantaljavamicroservicestemplate
+      - build_javamicroservicestemplate
