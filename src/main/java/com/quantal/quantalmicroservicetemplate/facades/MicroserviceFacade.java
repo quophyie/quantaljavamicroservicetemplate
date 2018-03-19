@@ -1,5 +1,6 @@
 package com.quantal.quantalmicroservicetemplate.facades;
 
+import com.quantal.javashared.annotations.logger.InjectLogger;
 import com.quantal.javashared.dto.CommonLogFields;
 import com.quantal.javashared.dto.LogEvent;
 import com.quantal.javashared.dto.LogzioConfig;
@@ -34,6 +35,7 @@ public class MicroserviceFacade extends AbstractBaseFacade {
   private MessageService messageService;
 
   //private Logger logger = LoggerFactory.getLogger(this.getClass())
+  @InjectLogger
   private QuantalLogger logger;
 
   @Autowired
@@ -41,14 +43,11 @@ public class MicroserviceFacade extends AbstractBaseFacade {
                             GiphyApiService giphyApiService,
                             MessageService messageService,
                             OrikaBeanMapper orikaBeanMapper,
-                            NullSkippingOrikaBeanMapper nullSkippingOrikaBeanMapper,
-                            CommonLogFields commonLogFields,
-                            LogzioConfig logzioConfig) {
+                            NullSkippingOrikaBeanMapper nullSkippingOrikaBeanMapper) {
     super(orikaBeanMapper, nullSkippingOrikaBeanMapper);
     this.microserviceService = microserviceService;
     this.giphyApiService = giphyApiService;
     this.messageService = messageService;
-    logger = QuantalLoggerFactory.getLogzioLogger(this.getClass(), commonLogFields, logzioConfig);
   }
 
   public ResponseEntity<?> saveOrUpdateUser(MicroserviceDto microserviceDto){

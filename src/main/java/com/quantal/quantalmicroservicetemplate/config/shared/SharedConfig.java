@@ -1,6 +1,8 @@
 package com.quantal.quantalmicroservicetemplate.config.shared;
 
+import com.quantal.javashared.beanpostprocessors.LoggerInjectorBeanPostProcessor;
 import com.quantal.javashared.dto.CommonLogFields;
+import com.quantal.javashared.dto.LoggerConfig;
 import com.quantal.javashared.dto.LogzioConfig;
 import com.quantal.javashared.logger.QuantalLoggerFactory;
 import com.quantal.javashared.objectmapper.NullSkippingOrikaBeanMapper;
@@ -50,6 +52,7 @@ public class SharedConfig {
         return new MessageServiceImpl(messageSource);
     }
 
+
     @Bean
     public CommonLogFields commonLogFields() throws UnknownHostException {
         String hostname = InetAddress.getLocalHost().getHostName();
@@ -68,6 +71,18 @@ public class SharedConfig {
     @Bean
     public LogzioConfig logzioConfig(@Value("${logzio.token}") String logzioToken) {
         return QuantalLoggerFactory.createDefaultLogzioConfig(logzioToken, Optional.empty(), Optional.empty());
+    }
+
+    @Bean
+    public LoggerConfig loggerConfig(LogzioConfig logzioConfig, CommonLogFields commonLogFields){
+        LoggerConfig loggerConfig = LoggerConfig.builder().build();
+        loggerConfig.setLogzioConfig(logzioConfig);
+        loggerConfig.setCommonLogFields(commonLogFields);
+        return loggerConfig;
+    }
+    @Bean
+    public LoggerInjectorBeanPostProcessor loggerInjectorBeanPostProcessor(CommonLogFields commonLogFields, LogzioConfig logzioConfig){
+        return new LoggerInjectorBeanPostProcessor(commonLogFields, logzioConfig);
     }
 
 }

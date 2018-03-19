@@ -1,6 +1,7 @@
 package com.quantal.quantalmicroservicetemplate.controllers;
 
 import com.quantal.javashared.dto.CommonLogFields;
+import com.quantal.javashared.dto.LoggerConfig;
 import com.quantal.javashared.logger.QuantalLoggerFactory;
 import com.quantal.javashared.services.interfaces.MessageService;
 import com.quantal.quantalmicroservicetemplate.controlleradvice.ExceptionHandlerCotrollerAdvice;
@@ -55,7 +56,9 @@ public class MicroserviceControllerTests {
 
         microserviceController = new MicroserviceController(microserviceFacade);
 
-        ReflectionTestUtils.setField(microserviceController, "logger", QuantalLoggerFactory.getLogger(MicroserviceController.class, new CommonLogFields()));
+        ReflectionTestUtils.setField(microserviceController, "logger", QuantalLoggerFactory.getLogger(MicroserviceController.class, LoggerConfig.builder()
+                .commonLogFields(new CommonLogFields())
+                .build()));
         ExceptionHandlerCotrollerAdvice exceptionHandlerCotrollerAdvice = new ExceptionHandlerCotrollerAdvice(messageService);
         this.mvc = MockMvcBuilders.standaloneSetup(microserviceController)
                 .setControllerAdvice(exceptionHandlerCotrollerAdvice)
