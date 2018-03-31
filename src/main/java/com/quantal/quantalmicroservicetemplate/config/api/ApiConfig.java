@@ -1,11 +1,13 @@
 package com.quantal.quantalmicroservicetemplate.config.api;
 
+import com.quantal.javashared.aspects.RetrofitRequiredHeadersEnforcerAspectJAspect;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
+import org.aspectj.lang.Aspects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +26,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 @Configuration
 public class ApiConfig
 {
+
     @Bean
     public OkHttpClient okHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();;
@@ -53,6 +56,12 @@ public class ApiConfig
 
         OkHttpClient client = builder.build();
         return client;
+    }
+
+    @Bean
+    public RetrofitRequiredHeadersEnforcerAspectJAspect requestHeadersAspect(){
+        RetrofitRequiredHeadersEnforcerAspectJAspect requestHeadersAspect = Aspects.aspectOf(RetrofitRequiredHeadersEnforcerAspectJAspect.class);
+        return  requestHeadersAspect;
     }
 
     @Bean

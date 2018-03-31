@@ -455,3 +455,23 @@ CommonLogFields commonLogFields =  new CommonLogFields();
 </project>
 
 ```
+
+   ##### The aop.xml (resources/META-INF/aop.xml)
+   ```xml
+    <!DOCTYPE aspectj PUBLIC "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+    <aspectj>
+        <weaver options="-verbose -showWeaveInfo -debug">
+            <!--
+                Only weave classes in our application-specific packages.
+                This should encompass any class that wants to utilize the aspects,
+                and must  encompass the aspects themselves.
+            -->
+            <include within="com.quantal.javashared.aspects.RetrofitRequiredHeadersEnforcerAspectJAspect" />
+        <!-- <include within="com.quantal.exchange.users.services.api.AuthorizationApiService"/> -->
+        </weaver>
+        <aspects>
+            <!-- declare aspects to the weaver -->
+            <aspect name="com.quantal.javashared.aspects.RetrofitRequiredHeadersEnforcerAspectJAspect" />
+        </aspects>
+    </aspectj>
+   ```
