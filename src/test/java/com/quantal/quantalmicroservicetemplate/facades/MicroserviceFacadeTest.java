@@ -1,17 +1,16 @@
 package com.quantal.quantalmicroservicetemplate.facades;
 
+import com.quantal.javashared.util.TestUtil;
 import com.quantal.quantalmicroservicetemplate.dto.MicroserviceDto;
 import com.quantal.quantalmicroservicetemplate.enums.Gender;
 import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
 import com.quantal.quantalmicroservicetemplate.services.interfaces.MicroserviceService;
-import com.quantal.javashared.util.TestUtil;
 import org.assertj.core.api.Java6Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
@@ -30,7 +29,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(SpringRunner.class)
 //@WebMvcTest(UserManagementFacade.class)
 @SpringBootTest
-@AutoConfigureMockMvc
+//@AutoConfigureMockMvc
 public class MicroserviceFacadeTest {
 
     @MockBean

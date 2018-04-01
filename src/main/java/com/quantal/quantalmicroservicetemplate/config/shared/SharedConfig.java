@@ -80,6 +80,7 @@ public class SharedConfig {
         loggerConfig.setCommonLogFields(commonLogFields);
         return loggerConfig;
     }
+
     @Bean
     public LoggerInjectorBeanPostProcessor loggerInjectorBeanPostProcessor(CommonLogFields commonLogFields, LogzioConfig logzioConfig){
         return new LoggerInjectorBeanPostProcessor(commonLogFields, logzioConfig);
