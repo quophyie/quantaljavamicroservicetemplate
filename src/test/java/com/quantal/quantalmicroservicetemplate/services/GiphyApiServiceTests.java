@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import retrofit2.Retrofit;
 import retrofit2.adapter.java8.Java8CallAdapterFactory;
@@ -54,7 +53,7 @@ public class GiphyApiServiceTests {
     public void shouldBeAbleToGetPokenHoverfly() throws ExecutionException, InterruptedException {
 
         // When
-        String result = giphyApiService.getPokemon(20, 0).get();
+        String result = giphyApiService.getPokemon(20, 0,"EVENT", "TRACE_ID").get();
         String jsonStringResult = StringEscapeUtils.unescapeJson(result);
 
         //Then
