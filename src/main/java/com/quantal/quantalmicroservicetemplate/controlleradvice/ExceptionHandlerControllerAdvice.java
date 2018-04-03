@@ -20,14 +20,14 @@ import static com.quantal.javashared.facades.AbstractBaseFacade.toRESTResponse;
  */
 @RestController
 @ControllerAdvice
-public class ExceptionHandlerCotrollerAdvice {
+public class ExceptionHandlerControllerAdvice {
 
     private Logger logger  = LogManager.getLogger();
 
     private MessageService messageService;
 
     @Autowired
-    public ExceptionHandlerCotrollerAdvice(MessageService messageService) {
+    public ExceptionHandlerControllerAdvice(MessageService messageService) {
         this.messageService = messageService;
     }
 
