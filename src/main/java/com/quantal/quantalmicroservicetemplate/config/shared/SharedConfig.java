@@ -4,6 +4,7 @@ import com.quantal.javashared.beanpostprocessors.LoggerInjectorBeanPostProcessor
 import com.quantal.javashared.dto.CommonLogFields;
 import com.quantal.javashared.dto.LoggerConfig;
 import com.quantal.javashared.dto.LogzioConfig;
+import com.quantal.javashared.filters.EventAndTraceIdMdcPopulatingFilter;
 import com.quantal.javashared.logger.QuantalLoggerFactory;
 import com.quantal.javashared.objectmapper.NullSkippingOrikaBeanMapper;
 import com.quantal.javashared.objectmapper.OrikaBeanMapper;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -84,6 +86,12 @@ public class SharedConfig {
     @Bean
     public LoggerInjectorBeanPostProcessor loggerInjectorBeanPostProcessor(CommonLogFields commonLogFields, LogzioConfig logzioConfig){
         return new LoggerInjectorBeanPostProcessor(commonLogFields, logzioConfig);
+    }
+
+    @Bean
+    @Order(1)
+    public EventAndTraceIdMdcPopulatingFilter eventAndTraceIdPopulatingFilter(){
+        return new EventAndTraceIdMdcPopulatingFilter();
     }
 
 }
