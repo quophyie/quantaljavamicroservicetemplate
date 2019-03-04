@@ -1,5 +1,6 @@
 package com.quantal.quantalmicroservicetemplate.controlleradvice;
 
+import com.quantal.javashared.filters.EventAndTraceIdMdcPopulatingFilter;
 import com.quantal.quantalmicroservicetemplate.constants.MessageCodes;
 import com.quantal.javashared.services.interfaces.MessageService;
 import com.quantal.javashared.util.CommonUtils;
@@ -18,13 +19,16 @@ import static com.quantal.javashared.facades.AbstractBaseFacade.toRESTResponse;
 /**
  * Created by dman on 08/07/2017.
  */
-@RestController
+//@RestController
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice {
 
     private Logger logger  = LogManager.getLogger();
 
     private MessageService messageService;
+
+    @Autowired
+    private EventAndTraceIdMdcPopulatingFilter eventAndTraceIdPopulatingFilter;
 
     @Autowired
     public ExceptionHandlerControllerAdvice(MessageService messageService) {
@@ -35,6 +39,7 @@ public class ExceptionHandlerControllerAdvice {
     @ExceptionHandler(Throwable.class)
     //@ResponseBody
     public ResponseEntity handleThrowable(final Throwable ex) {
+        CommonUtils.tryUpdateMDCWithEventAndTraceIdIfMissingFromMDC(ex, eventAndTraceIdPopulatingFilter);
         logger.error("Unexpected error", ex);
         ResponseEntity responseEntity = toRESTResponse(null,
                 messageService.getMessage(MessageCodes.INTERNAL_SERVER_ERROR),
