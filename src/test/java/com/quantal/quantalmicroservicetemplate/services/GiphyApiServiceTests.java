@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import retrofit2.Retrofit;
 import retrofit2.adapter.java8.Java8CallAdapterFactory;
@@ -27,6 +28,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 //@RunWith(MockitoJUnitRunner.class)
 @RunWith(SpringRunner.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class GiphyApiServiceTests {
 
     @ClassRule

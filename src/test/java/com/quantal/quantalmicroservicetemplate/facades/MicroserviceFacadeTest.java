@@ -6,6 +6,8 @@ import com.quantal.quantalmicroservicetemplate.enums.Gender;
 import com.quantal.quantalmicroservicetemplate.models.MicroserviceModel;
 import com.quantal.quantalmicroservicetemplate.services.api.GiphyApiService;
 import com.quantal.quantalmicroservicetemplate.services.interfaces.MicroserviceService;
+import de.invesdwin.instrument.DynamicInstrumentationLoader;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Java6Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +32,8 @@ import static org.mockito.Mockito.verify;
 //@WebMvcTest(UserManagementFacade.class)
 @SpringBootTest
 //@AutoConfigureMockMvc
+//@ContextConfiguration
+@Slf4j
 public class MicroserviceFacadeTest {
 
     @MockBean
@@ -42,6 +46,11 @@ public class MicroserviceFacadeTest {
    // @InjectMocks
     private MicroserviceFacade microserviceFacade;
 
+    static {
+        //Starts the aspectj weaver so that we can weave the compile time aspects
+        DynamicInstrumentationLoader.waitForInitialized(); //dynamically attach java agent to jvm if not already present
+        DynamicInstrumentationLoader.initLoadTimeWeavingContext(); //weave all classes before they are loaded as beans
+    }
     @Before
     public void setUp(){
      //microserviceFacade = new UserManagementFacade(microserviceService, giphyApiService);
